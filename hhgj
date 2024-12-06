@@ -1,0 +1,100 @@
+<?php
+session_start();
+
+// Connect to database
+$host = "host=127.0.0.1";
+$port = "port=5432";
+$dbname = "dbname=postgres";
+$credentials = "user=postgres password=pass123";
+$db = pg_connect("$host $port $dbname $credentials");
+
+if (!$db) {
+    echo "Error: Unable to open database\n";
+    exit;
+}
+if (!isset($_SESSION['username'])) {
+    header("Location: index.php");
+    exit();
+}
+
+$professor_id = $_SESSION['user_id'];
+$query = "SELECT course_id, course_name FROM courses WHERE professor_id = $professor_id";
+$result = pg_query($db, $query);
+
+if (!$result) {
+    echo "<p>Error in SQL query: " . pg_last_error($db) . "</p>";
+    exit;
+}
+
+$courses = [];
+while ($row = pg_fetch_assoc($result)) {
+    $courses[] = $row;
+}
+
+// Mark attendance (when form is submitted)
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
+    $course_id = $_POST['course_id'];
+    $date = $_POST['date'];
+    $student_id = $_POST['student_id'];
+    $status = $_POST['status'];
+    
+    $query = "INSERT INTO attendance (course_id, id, date, status) VALUES ($course_id, $student_id, '$date', '$status')";
+    $insert_result = pg_query($db, $query);
+    
+    if (!$insert_result) {
+        echo "<p>Error in SQL query: " . pg_last_error($db) . "</p>";
+    } else {
+        echo "<p>Attendance marked successfully.</p>";
+    }
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>mark attendance</title>
+    <link rel="stylesheet" href="./professor_dashboard.css">
+</head>
+<body>
+<form action="./professor_dashboard.php" method="post">
+            <button type="submit" name="logout">Go to Dashboard</button>
+        </form>
+    <h2>mark Dashboard</h2>
+    
+    <!-- List of Courses -->
+    <h3>Your Courses:</h3>
+    <ul>
+        <?php foreach ($courses as $course): ?>
+            <li><?php echo htmlspecialchars($course['course_name']); ?></li>
+        <?php endforeach; ?>
+    </ul>
+
+    <!-- Attendance Form -->
+    <h3>Mark Attendance:</h3>
+    <form method="POST">
+        <label for="course_id">Course:</label>
+        <select name="course_id" id="course_id">
+            <?php foreach ($courses as $course): ?>
+                <option value="<?php echo $course['course_id']; ?>"><?php echo htmlspecialchars($course['course_name']); ?></option>
+            <?php endforeach; ?>
+        </select>
+        
+        <label for="date">Date:</label>
+        <input type="date" name="date" id="date" required>
+        
+        <label for="student_id">Student ID:</label>
+        <input type="text" name="student_id" id="student_id" required>
+        
+        <label for="status">Status:</label>
+        <select name="status" id="status" required>
+            <option value="present">Present</option>
+            <option value="absent">Absent</option>
+        </select>
+        
+        <button type="submit" name="submit">Mark Attendance</button>
+    </form>
+
+</body>
+</html>

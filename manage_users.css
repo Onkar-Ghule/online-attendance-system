@@ -1,0 +1,118 @@
+/* General page styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f6f8;
+    color: #333;
+}
+
+/* Header styling */
+h2 {
+    text-align: center;
+    margin-top: 20px;
+    color: #333;
+}
+
+/* Forms and inputs */
+form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="email"],
+form textarea,
+form select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+form button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+form button:hover {
+    background-color: #45a049;
+}
+
+/* Tables for user lists */
+table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+table th,
+table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+table th {
+    background-color: #f2f2f2;
+    color: #333;
+    font-weight: bold;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Message styling */
+.message {
+    text-align: center;
+    margin: 15px auto;
+    padding: 10px;
+    width: 80%;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+.message-success {
+    background-color: #dff0d8;
+    color: #3c763d;
+}
+
+.message-error {
+    background-color: #f2dede;
+    color: #a94442;
+}
+
+/* Additional field containers */
+#professor-fields,
+#student-fields {
+    display: none;
+}
+
+button[name="logout"] {
+    background-color: #FF6347;
+    float: right;
+    padding: 8px 12px;
+    border-radius: 4px;
+    margin: 20px;
+    color: white;
+}
+
+button[name="logout"]:hover {
+    background-color: #d9534f;
+}
