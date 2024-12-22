@@ -1,0 +1,79 @@
+/* Reset some default styling */
+body, h3, h4, p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Basic styles for body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Container styles */
+.container {
+    width: 80%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Dashboard header styles */
+h3 {
+    color: #4CAF50;
+    margin-bottom: 10px;
+}
+
+/* Menu styles */
+.dashboard-menu {
+    list-style-type: none;
+    padding: 0;
+}
+
+.dashboard-menu li {
+    margin: 15px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.dashboard-menu li:hover {
+    background-color: #e7f3fe;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-menu li a {
+    text-decoration: none;
+    color: #007BFF;
+    display: flex;
+    align-items: center;
+    padding: 20px 30px;
+}
+
+.dashboard-menu li a i {
+    margin-right: 10px; /* Space between icon and text */
+}
+
+/* Logout button styles */
+.logout-form {
+    margin-top: 20px;
+}
+
+.logout-form button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.logout-form button:hover {
+    background-color: #d32f2f;
+}
